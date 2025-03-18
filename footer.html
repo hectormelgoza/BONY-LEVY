@@ -1,54 +1,5 @@
----
-products:
-    new:
-        limit: {{theme_settings.homepage_new_products_count}}
-    featured:
-        limit: {{theme_settings.homepage_featured_products_count}}
-    top_sellers:
-        limit: {{theme_settings.homepage_top_products_count}}
-carousel: {{theme_settings.homepage_show_carousel}}
-blog:
-    recent_posts:
-        limit: {{theme_settings.homepage_blog_posts_count}}
----
-{{#partial "hero"}}
-    {{#and banners.top (if theme_settings.top-banner-pos '===' 'above-carousel')}}
-    <div class="banners" data-banner-location="top">
-        {{#each (limit banners.top_metadata 1)}}
-        <div class="banner home-banner" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-banner-id="{{this.banner-name}}">
-            <div data-event-type="promotion-click">
-                {{{this.content}}}
-            </div>
-        </div>
-        {{/each}}
-    </div>
-    {{/and}}
-    
-    {{#if carousel}}
-        {{#if theme_settings.theme_version '===' 'Sporting'}}
-            {{> components/carousel arrows=theme_settings.homepage_show_carousel_arrows carousel_width=1200}}
-        {{else}}
-            {{> components/carousel arrows=theme_settings.homepage_show_carousel_arrows carousel_width=1440}}
-        {{/if}}
-    {{/if}}
-
-    <div class="container">
-        {{{region name="home_below_carousel"}}}
-
-        {{#and banners.top (if theme_settings.top-banner-pos '===' 'below-carousel')}}
-            <div class="banners" data-banner-location="top">
-                {{#each (limit banners.top_metadata 1)}}
-                <div class="banner home-banner--jewelry" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-banner-id="{{this.banner-name}}">
-                    <div data-event-type="promotion-click">
-                        {{{this.content}}}
-                    </div>
-                </div>
-                {{/each}}
-            </div>
-        {{/and}}
-    </div>
-    
-    {{#and banners.bottom (if theme_settings.bottom-banner-pos '===' 'below-carousel')}}
+{{#unless page_type '===' 'default'}}
+    {{#if banners.bottom}}
         {{#if settings.data_tag_enabled}}
             <div class="banners" data-banner-location="bottom">
                 {{#each (limit banners.bottom_metadata 1)}}
@@ -66,84 +17,92 @@ blog:
                 </div>
             </div>
         {{/if}}
-    {{/and}}
-    
-    {{{snippet 'home_content'}}}
+    {{/if}}
+{{/unless}}
 
-{{/partial}}
-
-{{#partial "page"}}
-    {{#each shipping_messages}}
-        {{> components/common/alert/alert-info message}}
-    {{/each}}
-
-    <div class="main full grid-bg">
-        {{!--
-        {{#if products.featured}}
-            {{> components/products/featured products=products.featured columns=theme_settings.homepage_featured_products_column_count}}
-        {{/if}}
-        --}}
-
-        <div class="container">
-            {{{region name="home_below_featured_products"}}}
-        </div>
-        
-        {{!--
-        {{#if products.top_sellers}}
-            {{> components/products/top products=products.top_sellers columns=theme_settings.homepage_top_products_column_count}}
-        {{/if}}
-        --}}
-
-        <div class="container">
-            {{{region name="home_below_top_products"}}}
-        </div>
-        
-        {{!--
-        {{#if products.new}}
-            {{> components/products/new products=products.new columns=theme_settings.homepage_new_products_column_count}}
-        {{/if}}
-        --}}
-        
-        <div class="container">
-            {{{region name="home_below_new_products"}}}
-        </div>
+{{#if settings.show_newsletter_box}}
+    <div class="footer-newsletter">
+        {{> components/common/subscription-form}}
     </div>
-{{/partial}}
+{{/if}}
 
-{{#partial "hero-bottom"}}
-    {{!--
-        {{#if blog.recent_posts}}
-            <div class="banners blog-posts-wrap">
-                <div class="container">
-                    <h2 class="page-heading">Recent Posts</h2> 
-                    <div class="blog-posts">
-                        {{#each blog.recent_posts}}
-                            {{> components/blog/post post=this}}
-                        {{/each}}
+{{#if page_type '===' 'default'}}
+    <div class="container">
+        {{{region name="home_above_footer"}}}
+    </div>
+{{/if}}
+                    
+<footer class="footer" role="contentinfo">
+    <span class="footer-title-sr-only">{{lang 'footer.title'}}</span>
+    <div class="container">
+        <section class="footer-info d6ce8c34f717647ffb908ce639001f19">
+            <article class="footer-info-col footer-info-dropdown footer-info-col--small" data-section-type="footer-categories">
+               
+            </article>
+
+            <article class="footer-info-col footer-info-dropdown footer-info-col--small" data-section-type="footer-webPages">
+                <span class="footer-info-heading">
+                    {{lang 'footer.navigate'}}
+                    <i class="icon" aria-hidden="true">
+                        <svg><use xlink:href="#icon-downselector" /></svg>
+                    </i>
+                </span>
+                <ul class="footer-info-list">
+                    <li><a href="/as-seen-on/">As Seen On</a></li>
+                    <li><a href="/faq/">FAQ</a></li>
+                    <li><a href="#">Events Calendar</a></li>
+                    <li><a href="/contact-us/">Contact Us</a></li>
+                    <li><a href="{{urls.sitemap}}">{{lang 'sitemap.page_title'}}</a></li>
+                </ul>
+
+            </article>
+            
+            {{#if theme_settings.social_icons_footer}}
+                <article class="footer-info-col footer-mobile-limited footer-info-col--small" data-section-type="footer-webPages">
+                    <span class="footer-info-heading">{{lang 'social.connect'}}</span>
+                    {{> components/common/social-links}}
+                </article>
+            {{/if}}
+            
+            {{#if settings.address}}
+                <article class="footer-info-col footer-mobile-limited footer-info-col--small" data-section-type="storeInfo">
+                    <div class="footer-logo-image-container">
+                        <img class="footer-logo-image" src="/content/footer-store-logo-new.png" alt="{{settings.store_logo.title}}" title="{{settings.store_logo.title}}" height="84" width="180">
                     </div>
-                </div>
+                </article>
+            {{/if}}
+        </section>
+        
+        {{#if settings.gift_certificates_enabled}}
+            <div class="footer-gift-certificates">
+                <a href="{{urls.gift_certificate.purchase}}">
+                    <i class="icon" aria-hidden="true">
+                        <svg><use xlink:href="#icon-tag" /></svg>
+                    </i>
+                    {{lang 'common.gift_cert'}}
+                </a>
             </div>
         {{/if}}
-    --}}
-    {{#and banners.bottom (if theme_settings.bottom-banner-pos '===' 'bottom-of-page')}}
-        {{#if settings.data_tag_enabled}}
-            <div class="banners abcd" data-banner-location="bottom">
-                {{#each (limit banners.bottom_metadata 1)}}
-                    <div class="banner {{#if page_type '===' 'default'}}home-banner--jewelry{{/if}}" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
-                        <div data-event-type="promotion-click">
-                            {{{this.content}}}
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
-        {{else}}
-            <div class="banners" data-banner-location="bottom">
-                <div class="banner {{#if page_type '===' 'default'}}home-banner{{/if}}">
-                    {{{limit banners.bottom 1}}}
-                </div>
-            </div>
-        {{/if}}
-    {{/and}}
-{{/partial}}
-
-{{> layout/base}}
+        
+        {{{region name="ssl_site_seal--global"}}}
+        
+        <div class="footer-copyright copyright_top">
+            {{> components/common/payment-icons}}
+            {{#if theme_settings.show_copyright_footer}}
+                <p class="powered-by">&copy; {{moment format="YYYY"}} {{settings.store_name}}. All rights reserved.</p>
+            {{/if}}
+        </div>
+        {{!--
+            {{#or theme_settings.show_powered_by theme_settings.show_built_by}}
+                <div class="footer-copyright copyright_bot" style="font-size: 12px;">
+                    {{#if theme_settings.show_powered_by}}
+                        <p class="powered-by">Powered by <a href="https://www.bigcommerce.com?utm_source=merchant&amp;utm_medium=poweredbyBC" rel="nofollow">BigCommerce</a></p>
+                    {{/if}}
+                    {{#if theme_settings.show_built_by}}
+                        <p class="powered-by">Developed by <a href="https://webdesksolution.com/bigcommerce-development-services/" target="_blank" rel="nofollow" >WebDesk</a></p>
+                    {{/if}}
+                </div> 
+            {{/or}} 
+        --}}
+    </div>
+</footer>
