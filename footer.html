@@ -1,0 +1,108 @@
+{{#unless page_type '===' 'default'}}
+    {{#if banners.bottom}}
+        {{#if settings.data_tag_enabled}}
+            <div class="banners" data-banner-location="bottom">
+                {{#each (limit banners.bottom_metadata 1)}}
+                    <div class="banner {{#if page_type '===' 'default'}}home-banner{{/if}}" data-event-type="promotion" data-entity-id="{{this.id}}" data-name="{{this.banner-name}}" data-position="{{this.location}}" data-name="{{this.banner-name}}">
+                        <div data-event-type="promotion-click">
+                            {{{this.content}}}
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <div class="banners" data-banner-location="bottom">
+                <div class="banner {{#if page_type '===' 'default'}}home-banner{{/if}}">
+                    {{{limit banners.bottom 1}}}
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+{{/unless}}
+
+{{#if settings.show_newsletter_box}}
+    <div class="footer-newsletter">
+        {{> components/common/subscription-form}}
+    </div>
+{{/if}}
+
+{{#if page_type '===' 'default'}}
+    <div class="container">
+        {{{region name="home_above_footer"}}}
+    </div>
+{{/if}}
+                    
+<footer class="footer" role="contentinfo">
+    <span class="footer-title-sr-only">{{lang 'footer.title'}}</span>
+    <div class="container">
+        <section class="footer-info d6ce8c34f717647ffb908ce639001f19">
+            <article class="footer-info-col footer-info-dropdown footer-info-col--small" data-section-type="footer-categories">
+               
+            </article>
+
+            <article class="footer-info-col footer-info-dropdown footer-info-col--small" data-section-type="footer-webPages">
+                <span class="footer-info-heading">
+                    {{lang 'footer.navigate'}}
+                    <i class="icon" aria-hidden="true">
+                        <svg><use xlink:href="#icon-downselector" /></svg>
+                    </i>
+                </span>
+                <ul class="footer-info-list">
+                    <li><a href="/as-seen-on/">As Seen On</a></li>
+                    <li><a href="/faq/">FAQ</a></li>
+                    <li><a href="#">Events Calendar</a></li>
+                    <li><a href="/contact-us/">Contact Us</a></li>
+                    <li><a href="{{urls.sitemap}}">{{lang 'sitemap.page_title'}}</a></li>
+                </ul>
+
+            </article>
+            
+            {{#if theme_settings.social_icons_footer}}
+                <article class="footer-info-col footer-mobile-limited footer-info-col--small" data-section-type="footer-webPages">
+                    <span class="footer-info-heading">{{lang 'social.connect'}}</span>
+                    {{> components/common/social-links}}
+                </article>
+            {{/if}}
+            
+            {{#if settings.address}}
+                <article class="footer-info-col footer-mobile-limited footer-info-col--small" data-section-type="storeInfo">
+                    <div class="footer-logo-image-container">
+                        <img class="footer-logo-image" src="/content/footer-store-logo-new.png" alt="{{settings.store_logo.title}}" title="{{settings.store_logo.title}}" height="84" width="180">
+                    </div>
+                </article>
+            {{/if}}
+        </section>
+        
+        {{#if settings.gift_certificates_enabled}}
+            <div class="footer-gift-certificates">
+                <a href="{{urls.gift_certificate.purchase}}">
+                    <i class="icon" aria-hidden="true">
+                        <svg><use xlink:href="#icon-tag" /></svg>
+                    </i>
+                    {{lang 'common.gift_cert'}}
+                </a>
+            </div>
+        {{/if}}
+        
+        {{{region name="ssl_site_seal--global"}}}
+        
+        <div class="footer-copyright copyright_top">
+            {{> components/common/payment-icons}}
+            {{#if theme_settings.show_copyright_footer}}
+                <p class="powered-by">&copy; {{moment format="YYYY"}} {{settings.store_name}}. <a href="https://webdesksolution.com/bigcommerce-development-services/" title="BigCommerce Store Developed B WebDesk" rel="nofollow" target="_blank">Big Commerce Store Developed By WebDesk</a></p>
+            {{/if}}
+        </div>
+        {{!--
+            {{#or theme_settings.show_powered_by theme_settings.show_built_by}}
+                <div class="footer-copyright copyright_bot" style="font-size: 12px;">
+                    {{#if theme_settings.show_powered_by}}
+                        <p class="powered-by">Powered by <a href="https://www.bigcommerce.com?utm_source=merchant&amp;utm_medium=poweredbyBC" rel="nofollow">BigCommerce</a></p>
+                    {{/if}}
+                    {{#if theme_settings.show_built_by}}
+                        <p class="powered-by">Developed by <a href="https://webdesksolution.com/bigcommerce-development-services/" target="_blank" rel="nofollow" >WebDesk</a></p>
+                    {{/if}}
+                </div> 
+            {{/or}} 
+        --}}
+    </div>
+</footer>
