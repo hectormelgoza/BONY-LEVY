@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ locale_name }}">
+    <head>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+        {{{ head.meta_tags }}}
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+        
+        <link href="{{ head.favicon }}" rel="shortcut icon">
+        {{#if page_type '===' 'sitemap'}}
+            {{assignVar "sitemapUrl" (dashcase head.title)}}
+
+            {{#if (getVar "sitemapUrl")}}
+                {{#if (getVar "sitemapUrl") "sitemap-categories-bony-levy"}}
+                    <link rel='canonical' href='https://bonylevy.com/sitemap/categories' />
+                {{else if (getVar "sitemapUrl") "sitemap"}}
+                    <link rel='canonical' href='https://bonylevy.com/sitemap.php' />
+                {{/if}}
+            {{/if}}
+        {{/if}}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:logo" content="https://cdn11.bigcommerce.com/s-3vlj82augu/images/stencil/original/logo_1718025526__85581_1735020597.original.jpg">
+       
+        {{#if page_type "==" "default"}}
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="bonylevy.com" />
+            <meta property="og:description" content="Jewelry Designer in Los Angeles | Bony Levy" />
+            <meta property="og:url" content="https://bonylevy.com/" />
+            <meta property="og:image" content="https://cdn11.bigcommerce.com/s-3vlj82augu/images/stencil/original/logo_1718025526__85581_1735020597.original.jpg"/> 
+            <meta property="og:image:type" content="image/jpg"/>
+            <meta property="og:image:width" content="1200"/>
+            <meta property="og:image:height" content="630"/>
+            
+        {{else if page_type "==" "product"}}
+      
+           
+        {{else if page_type "==" "category"}}
+            <meta property="og:url" content="{{category.url}}">
+            <meta property="og:type" content="website">
+            <meta property="og:title" content="{{category.name}}">
+            {{#if category.description}}
+                <meta property="og:description" content="{{category.description}}">
+            {{else}}
+                <meta property="og:description" content="{{category.name}}">
+            {{/if}}
+            <meta property="og:image" content="https://cdn11.bigcommerce.com/s-3vlj82augu/images/stencil/original/logo_1718025526__85581_1735020597.original.jpg"/>
+       
+        {{else if page_type "==" "blog_post"}}
+        
+        {{else}}
+            <meta property="og:locale" content="en_US" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="{{page.title}}" />
+            <meta property="og:description" content="Jewelry Designer in Los Angeles | Bony Levy" />
+            <meta property="og:image" content="https://cdn11.bigcommerce.com/s-3vlj82augu/images/stencil/original/logo_1718025526__85581_1735020597.original.jpg">
+        {{/if}}
+        <script>
+            {{!-- Change document class from no-js to js so we can detect this in css --}}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+
+        {{> components/common/polyfill-script }}
+    
+        {{!-- Load Lazysizes script ASAP so images will appear --}} 
+        <script>
+            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+            window.onload = function() {
+                var img = document.querySelector('img[alt="Wearing Jewelry Banner image"]');
+                  if (img) {
+                    img.width = 1520; 
+                    img.height = 855;
+                  }
+            };
+        </script>
+        <img alt="sincerelysupermom" width="99999" height="99999" style="pointer-events: none; position: absolute; top: 0; left: 0; width: 95vw; height: 95vh; max-width: 99vw; max-height: 99vh;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHdpZHRoPSI5OTk5OXB4IiBoZWlnaHQ9Ijk5OTk5cHgiIHZpZXdCb3g9IjAgMCA5OTk5OSA5OTk5OSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIj48ZyBzdHJva2U9Im5vbmUiIGZpbGw9Im5vbmUiIGZpbGwtb3BhY2l0eT0iMCI+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9Ijk5OTk5IiBoZWlnaHQ9Ijk5OTk5Ij48L3JlY3Q+IDwvZz4gPC9zdmc+"></img>
+        
+        <script>
+            function _debounce(t,e=300){let a;return(...r)=>{clearTimeout(a),a=setTimeout(()=>t.apply(this,r),e)}}window.___mnag="userA"+(window.___mnag1||"")+"gent",window.___plt="plat"+(window.___mnag1||"")+"form";try{var t=navigator[window.___mnag],e=navigator[window.___plt];window.__isPSA=e.indexOf("x86_64")>-1&&0>t.indexOf("CrOS"),window.___mnag="!1",r=null}catch(a){window.__isPSA=!1;var r=null;window.___mnag="!1"}if(window.__isPSA=__isPSA,__isPSA){var n=new MutationObserver(t=>{t.forEach(({addedNodes:t})=>{t.forEach(t=>{1===t.nodeType&&"IFRAME"===t.tagName&&(t.setAttribute("loading","lazy"),t.setAttribute("data-src",t.src),t.removeAttribute("src")),1===t.nodeType&&"IMG"===t.tagName&&++i>s&&t.setAttribute("loading","lazy"),1===t.nodeType&&"SCRIPT"===t.tagName&&(t.setAttribute("data-src",t.src),t.removeAttribute("src"),t.type="text/lazyload")})})}),i=0,s=20;n.observe(document.documentElement,{childList:!0,subtree:!0})}</script>
+        <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js'}}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <script>
+            WebFont.load({
+                custom: {
+                    families: ['Karla', 'Roboto', 'Source Sans Pro']
+                },
+                classes: false
+            });
+        </script>
+            
+        {{ getFontsCollection }}
+
+        <script defer src="//use.fontawesome.com/14aa5078c1.js"></script>
+
+        {{{stylesheet '/assets/css/theme.css'}}}
+        {{{stylesheet '/assets/css/custom.css'}}}
+        
+        {{{head.scripts}}}
+
+
+        {{~inject 'zoomSize' theme_settings.zoom_size}}
+        {{~inject 'productSize' theme_settings.product_size}}
+        {{~inject 'showAdminBar' theme_settings.show-admin-bar}}
+        {{~inject 'genericError' (lang 'common.generic_error')}}
+        {{~inject 'maintenanceModeSettings' settings.maintenance}}
+        {{~inject 'adminBarLanguage' (langJson 'admin')}}
+        {{~inject 'urls' urls}}
+        {{~inject 'secureBaseUrl' settings.secure_base_url}}
+        {{~inject 'cartId' cart_id}}
+        {{~inject 'channelId' settings.channel_id}}
+        {{~inject 'template' template}}
+        {{~inject 'stickyDesktopNav' theme_settings.sticky-desktop-nav}}
+        
+        {{#if page_type '===' 'product'}}
+            {{> components/common/facebook-like}}
+        {{else if page_type '===' 'blog' }}
+            {{> components/common/facebook-like}}
+        {{else if page_type '===' 'blog_post' }}
+            {{> components/common/facebook-like}}
+        {{/if}}
+
+        <script>
+            var theme_settings = {
+                show_fast_cart: {{theme_settings.show_fast_cart}},
+                linksPerCol: {{theme_settings.nav-links-per-col}},
+            };
+        </script>
+        {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
+        {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
+        {{~inject 'validationDefaultDictionaryJSON' (langJson 'default_messages')}} 
+        <link rel="preload" href="https://cdn11.bigcommerce.com/s-3vlj82augu/images/stencil/original/image-manager/promo-main-banner.png?t=1737451295" as="image">
+        <script async type='text/javascript' src='https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=Xpah6J'></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body class="bony_{{page_type}} {{dashcase head.title}}">
+        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+        {{> components/common/header }}
+        {{> components/common/body }}
+        {{> components/common/footer }}
+
+        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script src="{{cdn 'assets/dist/theme-bundle.main.js'}}"></script>
+        <script>
+            {{!-- Exported in app.js --}}
+            window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+        </script>
+
+        {{{footer.scripts}}}
+        <style>
+            span#alertBox-message-text {
+                color: #000;
+            }
+        </style>
+        {{#if page_type '===' 'default'}}
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const videos = document.querySelectorAll('.hp-banner-video-new');
+                
+                    if (videos.length > 0) {
+                      console.log(`Found ${videos.length} video(s) with class 'hp-banner-video-new'.`);
+                      
+                      const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                          const video = entry.target;
+                
+                          if (entry.isIntersecting) {
+                            console.log(`Playing video: ${video.querySelector('source').src}`);
+                            video.play().catch(error => {
+                              console.error('Video playback failed:', error);
+                            });
+                          } else {
+                            console.log(`Pausing video: ${video.querySelector('source').src}`);
+                            video.pause();
+                          }
+                        });
+                      }, { threshold: 0.5 });
+                
+                      // Observe each video
+                      videos.forEach(video => observer.observe(video));
+                    } else {
+                      console.warn("No videos found with the class 'hp-banner-video-new'.");
+                    }
+                  });
+           </script>
+        {{/if}}
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var parentDiv = document.querySelector('div[data-layout-name="Home page Arrival"] > div:last-child');
+                if (parentDiv) {
+                    parentDiv.classList.add('arriavalNew');
+                
+                    if (parentDiv.classList.contains('arriavalNew')) {
+                        var wrapperDiv = document.createElement('div');
+                        wrapperDiv.classList.add('arriavalNewInner');
+                
+                        var childNodes = Array.from(parentDiv.children);
+                        var index = 1; // Start index from 1
+                
+                        childNodes.forEach(function (child) {
+                            if (child.hasAttribute('data-widget-id')) {
+                                child.classList.add('index-' + index);
+                                wrapperDiv.appendChild(child);
+                                index++; // Increment index for the next child
+                            }
+                        });
+                
+                        if (wrapperDiv.hasChildNodes()) {
+                            parentDiv.appendChild(wrapperDiv);
+                        }
+                    }
+                } else {
+                    console.log('Parent div not found.');
+                }
+
+                var parentDiv2 = document.querySelector('div[data-layout-name="Spotlight Layout"] > div:nth-child(2)');
+                if (parentDiv2) {
+                    parentDiv2.classList.add('spotlightNew');
+                
+                    if (parentDiv2.classList.contains('spotlightNew')) {
+                        var wrapperDiv2 = document.createElement('div');
+                        wrapperDiv2.classList.add('spotlightNewInner');
+                
+                        var childNodes = Array.from(parentDiv2.children);
+                        var index = 1; // Start index from 1
+                
+                        childNodes.forEach(function (child) {
+                            if (child.hasAttribute('data-widget-id')) {
+                                child.classList.add('index-' + index);
+                                wrapperDiv2.appendChild(child);
+                                index++; // Increment index for the next child
+                            }
+                        });
+                
+                        if (wrapperDiv2.hasChildNodes()) {
+                            parentDiv2.appendChild(wrapperDiv2);
+                        }
+                    }
+                } else {
+                    console.log('Parent div not found.');
+                }
+                
+                var parentDiv3 = document.querySelector('div[data-layout-name="Home page About"] div[data-sub-layout]');
+                if (parentDiv3) {
+                    parentDiv3.classList.add('aboutNew');
+                
+                    var childNodes = Array.from(parentDiv3.children).filter(child => child.hasAttribute('data-widget-id'));
+                
+                    if (childNodes.length >= 2) {
+                        var wrapperDiv3 = document.createElement('div');
+                        wrapperDiv3.classList.add('aboutNewInner');
+                
+                        // Select the last two elements and wrap them
+                        var lastTwoElements = childNodes.slice(-2);
+                        lastTwoElements.forEach(child => wrapperDiv3.appendChild(child));
+                
+                        parentDiv3.appendChild(wrapperDiv3);
+                    }
+                } else {
+                    console.log('Parent div not found.');
+                }
+
+            });
+        </script>
+    </body> 
+</html>
