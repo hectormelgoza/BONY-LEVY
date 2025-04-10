@@ -224,7 +224,7 @@
         "reset": "Reset",
         "filter_reset_announcement": "The filter has been reset",
         "view_all": {
-            "name": "Shop All {category}"
+            "name": "Shop {category}"
         }
     },
     "brand": {
